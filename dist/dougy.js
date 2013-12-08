@@ -194,12 +194,12 @@
     /**
      * @type {String}
      */
-    tagName: 'div',
+    "tagName": 'div',
     
     /**
      * View builer method.
      */
-    builder: function (view, options) {
+    "builder": function (view, options) {
       var tagName;
       
       (options || (options = {}));
@@ -212,7 +212,7 @@
     /**
      * Returnsthe view instance's root DOM element.
      */
-    getElement: function () {
+    "getElement": function () {
       return this.el;
     }
   });
