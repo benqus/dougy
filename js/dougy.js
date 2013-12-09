@@ -21,6 +21,24 @@
   };
   
   /**
+   * Determines whether the given argument is not undefined and is not null.
+   * @param {*} arg
+   * @returns {Boolean}
+   */
+  var isDefined = function (arg) {
+    return typeof arg !== 'undefined' && arg !== null;
+  };
+  
+  /**
+   * Determines whether the given argument is a String or not
+   * @param {*} arg
+   * @returns {Boolean}
+   */
+  var isString = function (arg) {
+    return typeof arg === 'string';
+  };
+  
+  /**
    * Extends the receiver object with all the remaining arguments properties.
    * @param {Object} receiver
    * @returns {Object}
@@ -57,11 +75,19 @@
     }());
   }
   
+  /**
+   * @namespace dougy
+   */
   dougy = {
-    //utilities
-    utils: {
+    /**
+     * @namespace utils
+     * @type {Object}
+     */
+    "utils": {
       "isFunction": isFunction,
+      "isDefined": isDefined,
       "isObject": isObject,
+      "isString": isString,
       "extend": extend
     },
     

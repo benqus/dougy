@@ -1,34 +1,67 @@
 /* global: dougy */
 (function (dougy) {
+  "use strict";
+  
+  // base (super)
+  var base = dougy.component;
+
+  // base#destroy
+  var destroy = base.destroy;
   
   /**
    * @class view
    * @extends {dougy}
    */
-  dougy.view = dougy.extend({
+  dougy.view = base.extend({
     /**
      * @type {String}
      */
     "tagName": 'div',
     
     /**
-     * View builer method.
+     * Builds a new view instance with own behaviour.
+     * @param {view} view instance
+     * @param {Object} [options]
+     * @param {Element} [options.el]
+     * @param {String} [options.tagName]
      */
-    "builder": function (view, options) {
+    "builder": function ($view, options) {
       var tagName;
       
       (options || (options = {}));
       
       tagName = (options.tagName || this.tagName);
       
-      view.el = (options.el || document.createElement(tagName));
+      $view.el = (options.el || document.createElement(tagName));
     },
     
     /**
-     * Returnsthe view instance's root DOM element.
+     * Returns the view instance's root DOM element.
+     * Example:
+     * 
+     *    var myView = dougy.view.create({
+     *      "tagName": 'li'
+     *    });
+     *    myView.getElement(); // [object HTMLLIElement]
+     * 
+     * @returns {Element}
      */
     "getElement": function () {
       return this.el;
+    },
+    
+    /**
+     * @override
+     */
+    "destroy": function () {
+      var el = this.getElement();
+      var parent = el.parentNode;
+      
+      if (parent) {
+        parent.removeChild(el);
+      }
+      
+      return destroy.apply(this, arguments);
     }
   });
   
