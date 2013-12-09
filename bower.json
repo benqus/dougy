@@ -1,0 +1,21 @@
+{
+  "name": "dougy",
+  "version": "0.2.0a",
+  "description": "Tiny, extensible JavaScript MV library based on Douglas Crockford's recommendations.",
+  "author": "Bence Kormos <ben.kormos@gmail.com>",
+  "main": "dist/dougy.js",
+  
+  "devDependencies": {
+    "jasmine": "v2.0.0.rc5"
+  },
+  
+  "license": {
+    "type": "mit",
+    "url": "https://github.com/benqus/dougy/blob/master/LICENSE"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benqus/dougy"
+  }
+}
