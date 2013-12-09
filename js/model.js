@@ -62,7 +62,7 @@
       if (isString(arg) && arg && isDefined(value)) {
         attributes[arg] = value;
       } else if (isObject(arg)) {
-        extend(attributes, attrs);
+        extend(attributes, arg);
       }
        
       return this;
