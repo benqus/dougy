@@ -5,6 +5,11 @@
   "author": "Bence Kormos <ben.kormos@gmail.com>",
   "main": "dist/dougy.js",
   
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-concat": "~0.3.0"
+  },
+  
   "license": {
     "type": "mit",
     "url": "https://github.com/benqus/dougy/blob/master/LICENSE"

@@ -1,7 +1,4 @@
-// Dougy - 0.2.0
-// License: MIT
-// Author: Bence Kormos
-// Repository: https://github.com/benqus/dougy
+/** Dougy 0.2.0 */
 (function (global, create, slice) {
   // 'dougy' namespace
   var dougy;
@@ -126,6 +123,17 @@
     },
     
     /**
+     * Implements a mixin on th current context. Can be used on prototype or instance level.
+     * Example:
+     * 
+     *    var myComponent = dougy.component
+     * 
+     */
+    "implement": function (mixin) {
+      return extend(this, mixin);
+    },
+    
+    /**
      * Builds an object on top of the current context.
      * Invokes the context.build method to decorate the object.
      * Any arguments will be forwarded to the builder method.
@@ -149,7 +157,6 @@
 })(function () {
   return this;
 }(), Object.create, Array.prototype.slice);
-
 /* global: dougy */
 (function (dougy) {
   "use strict";
@@ -190,7 +197,6 @@
   });
 
 })(dougy);
-
 /* global: dougy */
 (function (global, dougy, utils, slice) {
   // utility methods
@@ -379,7 +385,6 @@
 })(function () {
   return this;
 }(), dougy, dougy.utils, Array.prototype.slice);
-
 /* global: dougy */
 (function (dougy, utils) {
   "use strict";
@@ -480,7 +485,6 @@
   });
   
 })(dougy, dougy.utils);
-
 /* global: dougy */
 (function (dougy) {
   "use strict";
