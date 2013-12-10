@@ -122,6 +122,22 @@
     },
     
     /**
+     * Implements a mixin on th current context. Can be used on both prototype or instance level.
+     * Example:
+     * 
+     *    var myComponent = dougy.component.create();
+     *    var emitter = dougy.emitter.create();
+     * 
+     *    myComponent.implement(emitter);
+     * 
+     * @param {Object}
+     * @returns {*}
+     */
+    "implement": function (mixin) {
+      return extend(this, mixin);
+    },
+    
+    /**
      * Builds an object on top of the current context.
      * Invokes the context.build method to decorate the object.
      * Any arguments will be forwarded to the builder method.

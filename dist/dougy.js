@@ -1,4 +1,4 @@
-/** Dougy 0.2.0 */
+/** Dougy 0.3.0 */
 (function (global, create, slice) {
   // 'dougy' namespace
   var dougy;
@@ -123,11 +123,16 @@
     },
     
     /**
-     * Implements a mixin on th current context. Can be used on prototype or instance level.
+     * Implements a mixin on th current context. Can be used on both prototype or instance level.
      * Example:
      * 
-     *    var myComponent = dougy.component
+     *    var myComponent = dougy.component.create();
+     *    var emitter = dougy.emitter.create();
      * 
+     *    myComponent.implement(emitter);
+     * 
+     * @param {Object}
+     * @returns {*}
      */
     "implement": function (mixin) {
       return extend(this, mixin);
