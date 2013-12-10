@@ -1,4 +1,4 @@
-/** Dougy 0.3.0 */
+/** Dougy 0.3.1 */
 (function (global, create, slice) {
   // 'dougy' namespace
   var dougy;
@@ -9,7 +9,7 @@
    * @returns {Boolean}
    */
   var isObject = function (arg) {
-    return arg && typeof arg === 'object' && !(arg instanceof Array);
+    return typeof arg === 'object' && arg !== null && !(arg instanceof Array);
   };
   
   /**
