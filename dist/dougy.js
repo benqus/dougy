@@ -140,7 +140,7 @@ dougy = {
   
   /**
    * Builds an object on top of the current context.
-   * Invokes the context.build method to decorate the object.
+   * Invokes the context.factory method to decorate the object.
    * Any arguments will be forwarded to the builder method.
    * @returns {Object}
    */
