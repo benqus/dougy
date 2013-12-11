@@ -5,7 +5,7 @@ Tiny, extensible JavaScript MV library based on Douglas Crockford's recommendati
 
 ## Important:
 
-There is no such thing as a constructor. A decorator which 'hangs' features to an instance is called a **builder**.
+There is no such thing as a constructor. A decorator which 'hangs' features to an instance is called a **factory**.
 
 ## Basic prototypes:
 
@@ -33,7 +33,7 @@ There is no such thing as a constructor. A decorator which 'hangs' features to a
 or a shorter and more compact version of this 'class' definition:
 
     var myClass = dougy.extend({
-      builder: function (instance, value) {
+      factory: function (instance, value) {
         var myPrivate = value;
         
         instance.myPublic = 'Public value';

@@ -25,7 +25,7 @@
      * @param {Element} [options.el]
      * @param {String} [options.tagName]
      */
-    "builder": function ($view, options) {
+    "factory": function ($view, options) {
       var tagName;
       
       (options || (options = {}));

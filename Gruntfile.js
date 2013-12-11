@@ -10,7 +10,10 @@ module.exports = function (grunt) {
       },
       "dist": {
         "src": [
-          'js/**/*.js'
+          'ext/intro',
+          'js/**/*.js',
+          'ext/expose.js',
+          'ext/outro'
         ],
         "dest": 'dist/dougy.js'
       }

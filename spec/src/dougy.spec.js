@@ -10,7 +10,7 @@
     };
     
     it('namespace', function () {
-      var features = 'utils,create,implement,extend,builder'.split(',');
+      var features = 'utils,create,implement,extend,factory'.split(',');
       
       while (features.length > 0) {
         expect(dougy[features.shift()]).toBeDefined();
@@ -77,7 +77,7 @@
       });
       
       it('create', function () {
-        var spy = spyOn(dougy, 'builder');
+        var spy = spyOn(dougy, 'factory');
         
         var i = dougy.create(1, 2, 3);
         
