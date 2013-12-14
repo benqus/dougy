@@ -150,5 +150,42 @@ dougy = {
     var args = slice.call(arguments);
     this.factory.apply(this, [instance].concat(args));
     return instance;
+  },
+  
+  "features": function (behaviour) {
+    var features = (Object.gerPrototypeOf(this) === behaviour);
+    var base, prop, i;
+    
+    if (isObject(behaviour)) {
+      base = this.base;
+      
+      while (!features && base) {
+        base = base.base;
+      }
+    }
+    
+    if (!features) {
+      if (isObject(behaviour)) {
+        for (prop in behaviour) {
+          if (behaviour.hasOwnProperty(prop) && !isDefined(this[prop])) {
+            return false;
+          }
+        }
+      } else if (behaviour instanceof Array) {
+        features = true;
+        
+        for (i = 0; i < behaviour.length; i++) {
+          prop = behaviour[i];
+          
+          if (!isDefined(this[prop])) {
+            return false;
+          }
+        }
+      } else if (isString(behaviour)) {
+        features = isDefined(this[behaviour]);
+      }
+    }
+    
+    return features;
   }
 };
