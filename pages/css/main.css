@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+/* reset */
+h1, h2, h3, h4, h5, h6, p, a, span, strong, em {
+  font-weight: normal;
+  line-height: 1em;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+
+a, a:link, a:visited, a:hover, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dougy {
+  width: 85em;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dougy ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dougy > header > hgroup {
+  padding: 6em .6em 4em;
+}
+
+.dougy > header > hgroup > * {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.dougy > header h1 {
+  font-size: 5em;
+  color: firebrick;
+  font-weight: 300;
+}
+
+.dougy > header h1 > span {
+  color: #666;
+  font-weight: 100;
+}
+
+.dougy > header h2 {
+  padding-left: 25em;
+}
+
+.dougy > .main {
+  padding-top: 2em;
+}
+
+.dougy > footer {
+  position: fixed;
+  width: 100%;
+  background-color: #666666;
+  color: white;
+  left: 0;
+  bottom: 0;
+}
