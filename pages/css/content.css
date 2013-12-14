@@ -1,0 +1,24 @@
+.content {
+  display: inline-block;
+  vertical-align: top;
+  width: 68em;
+  padding-left: 2em;
+}
+
+.content > section {
+  padding-bottom: 6em;
+}
+
+.content > section > header {
+  padding-bottom: 3em;
+}
+
+.content > section > header h1 {
+  font-size: 3em;
+  text-transfrom: capitalize;
+}
+
+.content > section p {
+  font-size: 1.5em;
+  font-weight: 300;
+}
