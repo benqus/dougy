@@ -76,6 +76,50 @@
         expect(obj.b).toBe(2);
       });
       
+      it('extend + base', function () {
+        var obj1 = dougy.extend({
+          "a": 1,
+          "b": 2
+        });
+        
+        var obj2 = obj1.extend({
+          "c": 3,
+          "d": 4
+        });
+        
+        expect(obj2.base).toBe(obj1);
+        
+        // because the instance is an "instance of" obj2
+        // on the first prototype level the base is obj1.
+        // Behaviour is meant to be shared on the prototype where this.base
+        // would refer to the super prototype of the context's prototype.
+        /**
+         * Example: 
+         * 
+         *    var myProto1 = dougy.extend({
+         *      getSomething: function () {
+         *        // do something ...
+         *      }
+         *    });
+         * 
+         *    var myProto2 = myProto1.extend({
+         * 
+         *      // @override
+         *      getSomething: function () {
+         *        // do something with this.base
+         *        this.base.getSomething.apply(this, arguments);
+         * 
+         *        // do some moar...
+         *      }
+         *    });
+         * 
+         *    myProto2.create()
+         *      .getSomething();
+         * 
+         */
+        expect(obj2.create().base).toBe(obj1);
+      });
+      
       it('create', function () {
         var spy = spyOn(dougy, 'factory');
         

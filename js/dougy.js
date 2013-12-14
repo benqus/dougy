@@ -117,6 +117,9 @@ dougy = {
       prototype.factory = factory;
     }
     
+    // reference to super object
+    prototype.base = this;
+    
     return prototype;
   },
   

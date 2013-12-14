@@ -1,4 +1,4 @@
-/** Dougy 0.4.0 */
+/** Dougy 0.4.1 */
 (function (global, create, slice) {
 // 'dougy' namespace
 var dougy;
@@ -118,6 +118,9 @@ dougy = {
     if (isFunction(factory)) {
       prototype.factory = factory;
     }
+    
+    // reference to super object
+    prototype.base = this;
     
     return prototype;
   },
