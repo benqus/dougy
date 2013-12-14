@@ -47,10 +47,12 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .dougy > header h2 {
-  padding-left: 25em;
+  padding-left: 10em;
+  font-size: 1.25em;
 }
 
 .dougy > .main {
+  position: relative;
   padding-top: 2em;
 }
 

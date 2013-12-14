@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .menu {
-  display: inline-block;
-  vertical-align: top;
+  position: absolute;
+  top: 0;
   width: 15em;
-  margin-right: -.2em;
+  padding-top: 3.75em;
 }
 
 .menu li {
@@ -13,10 +13,10 @@
 
 .menu li > a {
   display: block;
-  padding: .5em 0 .5em 1em;
+  padding: 1em 0 1em 1em;
   transition: all .2s ease-in-out;
   border-radius: .3em;
-  color: gray;
+  color: #999;
 }
 
 .menu li > a:hover,
@@ -28,7 +28,7 @@
 }
 
 .menu li > a:hover {
-  color: black;
+  color: #333;
 }
 
 .menu li > .active,

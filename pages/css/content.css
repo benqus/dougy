@@ -1,6 +1,5 @@
 .content {
-  display: inline-block;
-  vertical-align: top;
+  margin-left: 15em;
   width: 68em;
   padding-left: 2em;
 }
@@ -10,7 +9,7 @@
 }
 
 .content > section > header {
-  padding-bottom: 3em;
+  padding: 2em 0 3em 0;
 }
 
 .content > section > header h1 {
@@ -21,4 +20,5 @@
 .content > section p {
   font-size: 1.5em;
   font-weight: 300;
+  padding: 0 2em;
 }
