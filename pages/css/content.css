@@ -17,8 +17,26 @@
   text-transfrom: capitalize;
 }
 
-.content > section p {
+.content > section > article {
   font-size: 1.5em;
   font-weight: 300;
   padding: 0 2em;
+}
+
+.content > section > article ul {
+  margin: 0;
+}
+
+.content > section > article > p {
+  padding-bottom: 1em;
+}
+
+.content > section > article > section {
+  padding: 1em;
+}
+
+.content > section > article > section > header {
+  padding-bottom: 1em;
+  font-size: 1.5em;
+  color: cadetblue;
 }
