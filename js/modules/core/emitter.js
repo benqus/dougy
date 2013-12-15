@@ -5,6 +5,10 @@
   var isDefined = utils.isDefined;
   var isFunction = utils.isFunction;
   
+  var emitters = [];
+  var globalRE = /^global\:/;
+  var broadcastRE = /^broadcast\:/;
+  
   // base (super)
   var base = dougy.component;
 
@@ -39,6 +43,23 @@
         //when context matches listener's context
         if (listener.context === context || !isDefined(context)) {
           delete types[listener.id];
+        }
+      }
+    };
+    
+    /**
+     * @private
+     * Broadcasts 'global' or 'broadcast' events for all emitter objects.
+     */
+    var broadcast = function (self, type, args, includeSelf) {
+      var i = 0;
+      var emitter;
+      
+      for (; i < emitters.length; i++) {
+        emitter = emitters[i];
+        
+        if (emitter !== self || (emitter === self && includeSelf)) {
+          emitter.trigger.apply(emitter, [type].concat(args));
         }
       }
     };
@@ -156,9 +177,26 @@
     $emitter.trigger = function (type) {
       var args = slice.call(arguments, 1);
       var types = events[type];
+      var isBroadcast = broadcastRE.test(type);
+      var includeSelf = !isBroadcast;
       var listener, i;
-  
-      if (types) {
+      
+      /**
+       * Accepts events as 'global:my_event' or 'broadcast:my_event'.
+       * 
+       * Global emits events on all not yet destroyed emitters.
+       * 
+       * Broadcast emits events on all not yet distroyed emitters
+       *  except the one where the broadcast was triggered.
+       */
+      if (globalRE.test(type) || isBroadcast) {
+        broadcast(
+          this,
+          type.replace((isBroadcast ? broadcastRE : globalRE), ''),
+          args,
+          includeSelf
+        );
+      } else if (types) {
         for (i in types) {
           if (types.hasOwnProperty(i)) {
             listener = types[i];
@@ -173,12 +211,21 @@
   
       return this;
     };
+    
+    emitters.push($emitter);
   }, {
     /**
      * @override
      */
     destroy: function () {
+      var index = emitters.indexOf(this);
+      
+      if (index > -1) {
+        emitters.splice(index, 1);
+      }
+      
       this.off();
+      
       return destroy.apply(this, arguments);
     }
   });
