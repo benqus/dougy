@@ -27,6 +27,10 @@ code {
   color: yellow;
 }
 
+.variable {
+  color: deepskyblue;
+}
+
 .function {
   color: mediumorchid;
 }

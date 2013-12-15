@@ -93,6 +93,16 @@
                   </header>
                   <article class="code">
                     <code>
+                      <span class="var">var</span> <span class="variable">person</span> <span class="equals">=</span> dougy.component.<span class="invoke">extend</span>(<span class="curly left">{</span>
+                        <span class="curly content">
+                          <span class="comment block">
+                            <span class="line">// some implementation ...</span>
+                          </span>
+                        </span>
+                      <span class="curly right">}</span>)<span class="semi-colon">;</span>
+                      
+                      <span class="line">&nbsp;</span>
+                    
                       <span class="var">var</span> <span class="variable">user</span> <span class="equals">=</span> person.<span class="invoke">extend</span>(<span class="curly left">{</span>
                         
                         <span class="curly content">
@@ -101,16 +111,42 @@
                             <span class="line"> * @override</span>
                             <span class="line"> */</span>
                           </span>
+                          
                           <span class="method">initialize</span>: <span class="function">function</span> () <span class="curly left">{</span>
                             <span class="curly content">
                               <span class="this">this</span>.model.<span class="invoke">on</span>(<span class="string">'update'</span>, <span class="this">this</span>.<span class="invoke">listener</span>, <span class="this">this</span>)<span class="semi-colon">;</span>
                               <span class="return">return</span> person.<span class="invoke">initialize</span>.apply(<span class="this">this</span>, <span class="arguments">arguments</span>)<span class="semi-colon">;</span>
                             </span>
                           <span class="curly right">}</span><span class="comma">,</span>
-                          ...
+                          
+                          <span class="line">&nbsp;</span>
+                          
+                          <span class="comment block">
+                            <span class="line">// more implementation ...</span>
+                          </span>
                         </span>
                         
                       <span class="curly right">}</span>)<span class="semi-colon">;</span>
+                    </code>
+                  </article>
+                </section>
+                
+                <section>
+                  <header>
+                    <h1>Mixins</h1>
+                  </header>
+                  <article class="code">
+                    <code>
+                      <span class="var">var</span> <span class="variable">emitter</span> = dougy.emitter.create()<span class="semi-colon">;</span>
+                      <span class="var">var</span> <span class="variable">modelEmitter</span> <span class="equals">=</span> dougy.model.<span class="invoke">extend</span>(<span class="curly left">{</span>
+                        <span class="curly content">
+                          <span class="comment block">
+                            <span class="line">// some implementation ...</span>
+                          </span>
+                        </span>
+                      <span class="curly right">}</span>)<span class="semi-colon">;</span>
+                      <span class="line">&nbsp;</span>
+                      <span class="variable">modelEmitter</span>.implement(<span class="variable">emitter</span>)<span class="semi-colon">;</span>
                     </code>
                   </article>
                 </section>
