@@ -2,10 +2,7 @@
 <html lang="en">
     <head>
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic' />
-        <link rel="stylesheet" href="pages/css/fluid.css" />
         <link rel="stylesheet" href="pages/css/main.css" />
-        <link rel="stylesheet" href="pages/css/menu.css" />
-        <link rel="stylesheet" href="pages/css/content.css" />
         <link rel="stylesheet" href="pages/css/synthax.css" />
         
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -13,11 +10,14 @@
     </head>
     <body>
       <div class="dougy">
+        <a href="https://github.com/benqus/dougy" target="_blank">
+          <img style="position: fixed; top: 0; right: 0; border: 0; z-index: 9999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+        </a>
       
         <header>
           <hgroup>
-            <h1>Doug<span>y</span></h1>
-            <h2>Tiny, extensible JavaScript MV library based on Douglas Crockford's recommendations.</h2>
+            <h1>Dougy</h1>
+            <h2>Simplistic prototype chain builder toolkit.</h2>
           </hgroup>
         </header>
         
@@ -35,7 +35,7 @@
                 </li>
                 
                 <li>
-                  <a href="#prototypes_apis"><span>Prototypes / APIs</span></a>
+                  <a href="#prototype_chain"><span>Prototypes / APIs</span></a>
                   
                   <ol class="sub-menu">
                     <li>
@@ -58,7 +58,7 @@
                 </li>
                 
                 <li>
-                  <a href="http://github.com/benqus/dougy"><span>GitHub</span></a>
+                  <a href="http://github.com/benqus/dougy" target="_blank"><span>GitHub</span></a>
                 </li>
               </ol>
             </nav>
@@ -68,12 +68,22 @@
             
             <section id="concept">
               <header>
-                <h1>concept</h1>
+                <h1>Concept</h1>
               </header>
               <article>
-                <p>The best short description for dougy is the following: prototype-chain builder tool.</p>
+                <p>The best short description for dougy is the following: prototype-chain builder tool without dependencies.</p>
                 <p>Instead of focusing on classes (blueprints) and/or instances, dougy is more about building prototype-chains with object factories - just how it makes sense in JavaScript.</p>
                 <p>Dougy allows you to have private attributes (factory scope private for each instance) while keeping the shared properties/methods on the prototype - as it would be one schema.</p>
+                <p>One target was to keep dougy as simple as possible without any dependency. Generic features have been implemented only to let you architect and design your app upon them. You design, you decide. You have the choice to move for an <strong>MVC</strong>, <strong>MVP</strong> or something else; without unnecessarily <em>overriding</em> basic features provided by the framework/library.</p>
+
+                <section>
+                  <article class="code">
+                    <code>
+                      <span class="var">var</span> <span class="variable">controller</span> <span class="equals">=</span> dougy.component.<span class="invoke">extend</span>( ... )<span class="semi-colon">;</span>
+                    </code>
+                  </article>
+                </section>
+                
                 <p>As mentioned before prototype chains are in the middle of the focus therefore everything starts there. For instance:</p>
                 
                 <section>
@@ -134,6 +144,7 @@
                 <section>
                   <header>
                     <h1>Mixins</h1>
+                    <p>each mixin works with it's own pricate scope provided by the factory method</p>
                   </header>
                   <article class="code">
                     <code>
@@ -171,73 +182,294 @@
             
             <section id="getting_started">
               <header>
-                <h1>getting started</h1>
+                <h1>Getting started</h1>
               </header>
               <article>
-                <p>Donec lobortis eleifend mi a consequat. Aliquam ut lectus dui. Sed porta tempus aliquet. Morbi in quam id sem volutpat egestas. Duis id eros scelerisque neque pellentesque elementum. Donec risus metus, venenatis nec tempor sit amet, varius a erat. Vivamus fermentum dapibus risus eu volutpat. Donec pellentesque mollis nulla et elementum. Etiam adipiscing lacus sit amet enim feugiat tristique. Integer dapibus dictum massa, sed porttitor nunc dapibus sit amet. Morbi laoreet posuere lacus, a tempus velit dictum quis. Quisque vitae rutrum mi. Nullam pellentesque fringilla nunc, a condimentum ligula vestibulum vel. Nullam non odio arcu. Etiam convallis convallis velit, in iaculis mauris sollicitudin ut. Nulla facilisi.</p>
+                <p>I sincerely do hope that you will not need any further explanation about how to include a JavaScript file/module in the <span class="inline-highlight">&lt;head&gt;</span> element or require it from an <span class="inline-highlight">AMD</span> or <span class="inline-highlight">CommonJS</span> module.</p>
               </article>
             </section>
             
-            <section id="prototypes_apis">
+            <section id="prototype_chain">
               <header>
-                <h1>Prototypes / <span>APIs</span></h1>
+                <h1>Prototype Chain</h1>
               </header>
               <article>
-                <p>Phasellus tristique aliquam pulvinar. Fusce rutrum imperdiet ultricies. Etiam fermentum volutpat sapien ut sodales. Duis nec volutpat orci, in rutrum urna. Sed id porta lectus, sit amet scelerisque est. Donec commodo, mi a rutrum sagittis, ipsum nibh accumsan leo, sit amet molestie odio velit id mauris. Mauris gravida, odio vel aliquet convallis, nibh neque posuere quam, sed suscipit sem libero vel neque. Aliquam ante diam, volutpat id pellentesque adipiscing, adipiscing vitae velit.</p>
+                <p>Dougy has a very easy structure. On the bottom of the prototype chain there is the global <span class="inline-highlight">dougy</span> object. Everything <em>"inherits"</em> from dougy.</p>
+                <p>Next prototype level is the <span class="inline-highlight">dougy.component</span> object.</p>
+                <p>The remaining objects - <span class="inline-highlight">dougy.model</span>, <span class="inline-highlight">dougy.view</span> &amp; <span class="inline-highlight">dougy.emitter</span> - sit on top of dougy component.</p>
+                <ul class="prototype-chain">
+                  <li>
+                    <span class="inline-highlight">dougy</span>
+                    <ul>
+                      <li>
+                        <span class="inline-highlight">dougy.component</span>
+                        <ul>
+                          <li>
+                            <span class="inline-highlight">dougy.view</span>
+                          </li>
+                          <li>
+                            <span class="inline-highlight">dougy.model</span>
+                          </li>
+                          <li>
+                            <span class="inline-highlight">dougy.emitter</span>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
               </article>
             </section>
             
             <section id="prototype_dougy">
               <header>
-                <h1>prototype - dougy</h1>
+                <h1>Dougy</h1>
               </header>
               <article>
-                <p>Nulla ac eros et tellus ornare consectetur. Nulla dolor dui, facilisis vitae augue at, placerat rutrum neque. Suspendisse a accumsan tellus. Praesent sed sodales tellus. Curabitur non dui ipsum. Nunc quis purus id sem venenatis cursus. Fusce in auctor sapien. Maecenas pulvinar mollis felis, at suscipit elit feugiat pharetra. Vivamus ullamcorper interdum justo. Proin ornare diam vitae eros semper, quis pharetra arcu vehicula. Ut at laoreet nulla. Quisque nulla erat, pellentesque sed molestie vel, ultricies nec nisl.</p>
+                <p>Provides the basic protoype building features:</p>
+                <ul class="prototype-features">
+                  <li>
+                    <p><span class="inline-highlight">factory</span> you will need to override this method to create the private scope for each object built upon the dougy prototype chain.</p>
+                    <ul>
+                      <li>( <strong>instance</strong> {Object}, [arg1 [, arg2 [, ... [, argN]] )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">create</span> builds a new object upon the prorotype chain it was invoked on. All arguments will be passed to the factory method.</p>
+                    <ul>
+                      <li>( [arg1 [, arg2 [, ... [, argN]] )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">extend</span> extends a new prototype level from the one invoked on.</p>
+                    <ul>
+                      <li>( <strong>features</strong> {Object} )</li>
+                      <li>( <strong>factory</strong> {Function}, <strong>[features</strong> {Object} )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">implement</span> implements a mixin object to the context.</p>
+                    <ul>
+                      <li>( <strong>mixin</strong> {Object} )</li>
+                    </ul>
+                  </li>
+                </ul>
               </article>
             </section>
             
             <section id="prototype_component">
               <header>
-                <h1>prototype - component</h1>
+                <h1>Component</h1>
               </header>
               <article>
-                <p>Integer eget sapien sagittis, dapibus diam ut, volutpat risus. Mauris dolor lacus, consequat eu ipsum eu, aliquam accumsan est. Curabitur pretium augue dignissim posuere porta. Aenean gravida ullamcorper eros ac convallis. Phasellus sed lectus ipsum. Vestibulum tortor nunc, ornare vel semper non, pretium euismod nunc. Donec nec ipsum lobortis, aliquam nibh id, ultricies leo. Morbi augue leo, pharetra sed tempor sed, consectetur id enim. Nulla nec adipiscing neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Provides basic life-cycle features:</p>
+                
+                <section>
+                  <article class="code">
+                    <code>
+                      <span class="var">var</span> <span class="variable">myComponent</span> <span class="equals">=</span> dougy.component.<span class="invoke">create</span>()<span class="semi-colon">;</span>
+                    </code>
+                  </article>
+                </section>
+                
+                <p>Component API:</p>
+                <ul class="prototype-features">
+                  <li>
+                    <p><span class="inline-highlight">initialize</span></p>
+                    <ul>
+                      <li>( )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">suspend</span></p>
+                    <ul>
+                      <li>( )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">resume</span></p>
+                    <ul>
+                      <li>( )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">destroy</span></p>
+                    <ul>
+                      <li>( )</li>
+                    </ul>
+                  </li>
+                </ul>
               </article>
             </section>
             
             <section id="prototype_emitter">
               <header>
-                <h1>prototype - emitter</h1>
+                <h1>Emitter</h1>
               </header>
               <article>
-                <p>Integer eget sapien sagittis, dapibus diam ut, volutpat risus. Mauris dolor lacus, consequat eu ipsum eu, aliquam accumsan est. Curabitur pretium augue dignissim posuere porta. Aenean gravida ullamcorper eros ac convallis. Phasellus sed lectus ipsum. Vestibulum tortor nunc, ornare vel semper non, pretium euismod nunc. Donec nec ipsum lobortis, aliquam nibh id, ultricies leo. Morbi augue leo, pharetra sed tempor sed, consectetur id enim. Nulla nec adipiscing neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Event management namespace.</p>
+                <p>Creating new emitter objects/mixins:</p>
+                
+                <section>
+                  <article class="code">
+                    <code>
+                      <span class="var">var</span> <span class="variable">myEmitter</span> <span class="equals">=</span> dougy.emitter.<span class="invoke">create</span>()<span class="semi-colon">;</span>
+                    </code>
+                  </article>
+                </section>
+                
+                <p>Emitter object API:</p>
+                <ul class="prototype-features">
+                  <li>
+                    <p><span class="inline-highlight">on</span></p>
+                    <ul>
+                      <li>( <strong>event</strong> {String}, <strong>listener</strong> {Function} )</li>
+                      <li>( <strong>event</strong> {String}, <strong>listener</strong> {Function}, <strong>context</strong> {Object} )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">once</span></p>
+                    <ul>
+                      <li>( <strong>event</strong> {String}, <strong>listener</strong> {Function} )</li>
+                      <li>( <strong>event</strong> {String}, <strong>listener</strong> {Function}, <strong>context</strong> {Object} )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">off</span></p>
+                    <ul>
+                      <li>( <strong>event</strong> {String}, <strong>listener</strong> {Function}, <strong>context</strong> {Object} )</li>
+                      <li>( <strong>event</strong> {String}, <strong>listener</strong> {Function} )</li>
+                      <li>( <strong>event</strong> {String} )</li>
+                      <li>( <strong>event</strong> {String}, <strong>null | undefined</strong>, <strong>context</strong> {Object} )</li>
+                      <li>( <strong>event</strong> {String}, <strong>null | undefined</strong> )</li>
+                      <li>( <strong>event</strong> {String} )</li>
+                      <li>( <strong>null | undefined</strong>, <strong>listener</strong> {Function}, <strong>context</strong> {Object} )</li>
+                      <li>( <strong>null | undefined</strong>, <strong>listener</strong> {Function} )</li>
+                      <li>( <strong>null | undefined</strong> )</li>
+                      <li>( )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">trigger</span></p>
+                  </li>
+                </ul>
+                
+                <p>Special features:<br>Every emitter object is able to emit or broadcast global events</p>
+                <ul>
+                  <li>
+                    <p><span class="inline-highlight">global</span> events: fires events on all of the existing (or not yet destroyed) emitters.</p>
+
+                    <section>
+                      <article class="code">
+                        <code>
+                          <span class="var">var</span> <span class="variable">myEmitter</span> <span class="equals">=</span> dougy.emitter.<span class="invoke">create</span>()<span class="semi-colon">;</span>
+                          <span class="variable">myEmitter</span>.<span class="invoke">trigger</span>(<span class="string">"global:my_event"</span>, ...)<span class="semi-colon">;</span>
+                        </code>
+                      </article>
+                    </section>
+                    
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">broadcast</span> global events: fires events on all of the existing (or not yet destroyed) emitters, <strong>except the one the event was triggered on</strong>.</p>
+
+                    <section>
+                      <article class="code">
+                        <code>
+                          <span class="var">var</span> <span class="variable">myEmitter</span> <span class="equals">=</span> dougy.emitter.<span class="invoke">create</span>()<span class="semi-colon">;</span>
+                          <span class="variable">myEmitter</span>.<span class="invoke">trigger</span>(<span class="string">"broadcast:my_event"</span>, ...)<span class="semi-colon">;</span>
+                        </code>
+                      </article>
+                    </section>
+                    
+                  </li>
+                </ul>
               </article>
             </section>
             
             <section id="prototype_model">
               <header>
-                <h1>prototype - model</h1>
+                <h1>Model</h1>
               </header>
               <article>
-                <p>Integer eget sapien sagittis, dapibus diam ut, volutpat risus. Mauris dolor lacus, consequat eu ipsum eu, aliquam accumsan est. Curabitur pretium augue dignissim posuere porta. Aenean gravida ullamcorper eros ac convallis. Phasellus sed lectus ipsum. Vestibulum tortor nunc, ornare vel semper non, pretium euismod nunc. Donec nec ipsum lobortis, aliquam nibh id, ultricies leo. Morbi augue leo, pharetra sed tempor sed, consectetur id enim. Nulla nec adipiscing neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Generic domain/schema object.</p>
+                
+                <section>
+                  <article class="code">
+                    <code>
+                      <span class="var">var</span> <span class="variable">myModel</span> <span class="equals">=</span> dougy.model.<span class="invoke">create</span>(<span class="curly left">{</span>
+                        <span class="curly content">
+                          <span class="property">key1</span>: <span class="string">"some_value"</span><span class="comma">,</span>
+                          <span class="property">key2</span>: <span class="string">"other_value"</span>
+                        </span>
+                      <span class="curly right">}</span>)<span class="semi-colon">;</span>
+                    </code>
+                  </article>
+                </section>
+                
+                <p>Model API:</p>
+                <ul class="prototype-features">
+                  <li>
+                    <p><span class="inline-highlight">create</span></p>
+                    <ul>
+                      <li>( <strong>attributes</strong> {Object} )</li>
+                      <li>( )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">get</span> returns a key from the model's private attributes.</p>
+                    <ul>
+                      <li>( <strong>key</strong> {String} )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">set</span></p>
+                    <ul>
+                      <li>( <strong>key</strong> {String}, <strong>value</strong> {*} )</li>
+                      <li>( <strong>attributes</strong> {Object} )</li>
+                    </ul>
+                  </li>
+                    <p><span class="inline-highlight">unset</span> removes a key from the model's private attributes.</p>
+                    <ul>
+                      <li>( <strong>key</strong> {String} )</li>
+                    </ul>
+                  </li>
+                </ul>
               </article>
             </section>
             
             <section id="prototype_view">
               <header>
-                <h1>prototype - view</h1>
+                <h1>View</h1>
               </header>
               <article>
-                <p>Integer eget sapien sagittis, dapibus diam ut, volutpat risus. Mauris dolor lacus, consequat eu ipsum eu, aliquam accumsan est. Curabitur pretium augue dignissim posuere porta. Aenean gravida ullamcorper eros ac convallis. Phasellus sed lectus ipsum. Vestibulum tortor nunc, ornare vel semper non, pretium euismod nunc. Donec nec ipsum lobortis, aliquam nibh id, ultricies leo. Morbi augue leo, pharetra sed tempor sed, consectetur id enim. Nulla nec adipiscing neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Generic view object.</p>
+                
+                <p>View API:</p>
+                <ul class="prototype-features">
+                  <li>
+                    <p><span class="inline-highlight">create</span></p>
+                    <ul>
+                      <li>( <strong>attributes</strong> {Object} )</li>
+                      <li>( attributes.<strong>el</strong> {Element} )</li>
+                      <li>( attributes.<strong>tagName</strong> {String} )</li>
+                      <li>( )</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><span class="inline-highlight">getElement</span> returns a key from the model's private attributes.</p>
+                    <ul>
+                      <li>( )</li>
+                    </ul>
+                  </li>
+                </ul>
               </article>
             </section>
             
           </article>
-          
         </section>
         
         <footer>
-          <p>bla <br>bla</p>
+          <p>License: MIT</p>
         </footer>
         
       </div>

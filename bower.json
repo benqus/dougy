@@ -1,7 +1,7 @@
 {
   "name": "dougy",
   "version": "0.5.0",
-  "description": "Tiny, extensible JavaScript MV library based on Douglas Crockford's recommendations.",
+  "description": "Simplistic prototype chain builder toolkit.",
   "author": "Bence Kormos <ben.kormos@gmail.com>",
   "main": "dist/dougy.js",
   
