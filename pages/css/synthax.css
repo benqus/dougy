@@ -1,0 +1,69 @@
+code {
+  display: inline-block;
+  background: #202020;
+  padding: 1em;
+  color: white;
+  border-radius: .35em;
+  margin-left: 1.5em;
+}
+
+.var,
+.this,
+.return,
+.arguments,
+.semi-colon {
+  color: tomato;
+}
+
+.equals {
+  color: cyan;
+}
+
+.invoke {
+  color: mediumturquoise;
+}
+
+.string {
+  color: yellow;
+}
+
+.variable {
+  color: deepskyblue;
+}
+
+.function {
+  color: mediumorchid;
+}
+
+.line:after,
+.comma:after,
+.block:after,
+.semi-colon:after,
+.curly.left:after,
+.curly.right:before {
+  display: block;
+  content: '';
+}
+
+.block {
+  display: block;
+}
+
+.curly.content {
+  display: inline-block;
+  width: auto;
+}
+
+.curly.content {
+  margin: 0;
+  padding: 0 0 0 1em;
+}
+
+.comment {
+  color: dimgray;
+}
+
+.method,
+.property {
+  color: mediumseagreen;
+}
