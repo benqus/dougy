@@ -1,6 +1,6 @@
 {
   "name": "dougy",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Simplistic prototype chain builder toolkit.",
   "author": "Bence Kormos <ben.kormos@gmail.com>",
   "main": "dist/dougy.js",

@@ -1,4 +1,4 @@
-/** Dougy 0.5.0 */
+/** Dougy 0.6.0 */
 (function (global, create, slice) {
 // 'dougy' namespace
 var dougy;
@@ -64,6 +64,9 @@ var extend = function (receiver) {
   return receiver;
 };
 
+// just an empty function
+var emptyFunction = function () {};
+
 // implicit shim for Object.create
 if (!isFunction(create)) {
   create = (function () {
@@ -116,13 +119,25 @@ dougy = {
     }
     
     if (isFunction(factory)) {
-      prototype.factory = factory;
+      prototype.factory = factory || emptyFunction;
     }
     
     // reference to super object
     prototype.base = this;
     
     return prototype;
+  },
+  
+  "inherit": function (instance) {
+    var base = this.base;
+    
+    if (base && typeof base.inherit === 'function') {
+      base.inherit.apply(base, arguments);
+    }
+    
+    this.factory.apply(this, arguments);
+    
+    return instance;
   },
   
   /**
@@ -149,8 +164,12 @@ dougy = {
    */
   "create": function () {
     var instance = create(this);
-    var args = slice.call(arguments);
-    this.factory.apply(this, [instance].concat(args));
+    var args = [instance].concat(slice.call(arguments));
+    
+    if (typeof this.inherit === 'function') {
+      this.inherit.apply(this, args);
+    }
+    
     return instance;
   }
 };
@@ -439,17 +458,11 @@ dougy = {
   var isObject = utils.isObject;
   var isDefined = utils.isDefined;
   
-  // base (super)
-  var base = dougy.component;
-
-  // base#destroy
-  var destroy = base.destroy;
-  
   /**
    * @class model
    * @extends {dougy.component}
    */
-  dougy.model = base.extend(function ($model, attrs) {
+  dougy.model = dougy.component.extend(function ($model, attrs) {
     /**
      * @private
      * @type {Object}
@@ -520,11 +533,99 @@ dougy = {
     };
     
     /**
+     * Returns a plain Object clone of the model's attributes.
+     * @returns {Object}
+     */
+    $model.attributes = function () {
+      return extend({}, attributes);
+    };
+    
+    /**
+     * Filters the model's attributes based on the provided comparator method.
+     * 
+     * Example:
+     *    var model = dougy.model.create({
+     *      "a": 1,
+     *      "b": 2,
+     *      "c": 3,
+     *      //...
+     *    });
+     * 
+     *    var filtered = model.filter(function (key, value) {
+     *      return (key === 'a' || value < 3);
+     *    });
+     * 
+     * @param {Function} comparator
+     * @returns {Object}
+     */
+    $model.filter = function (comparator) {
+      var filtered = {};
+      
+      this.each(function (key, value) {
+        if (comparator.apply($model, arguments) === true) {
+          filtered[key] = value;
+        }
+      });
+      
+      return filtered;
+    };
+    
+    /**
+     * Iterates over the model's attributes and ivokes
+     * the provided method for each attribute.
+     * 
+     * Example:
+     *    var model = dougy.model.create({
+     *      "a": 1,
+     *      "b": 2,
+     *      "c": 3,
+     *      //...
+     *    });
+     * 
+     *    model.each(function (key, value, attributes) {
+     *      console.log(key, value, attributes);
+     *    });
+     * 
+     * @param {Function} iterator
+     * @returns {dougy.model}
+     */
+    $model.each = function (iterator) {
+      var i;
+      
+      for (i in attributes) {
+        if (attributes.hasOwnProperty(i)) {
+          iterator.call(this, i, attributes[i], attributes);
+        }
+      }
+      
+      return this;
+    };
+    
+    /**
+     * Returns a new dougy.model instance with the same attribute values.
+     * @returns {dougy.model}
+     */
+    $model.clone = function () {
+      return dougy.model.create(attributes);
+    };
+    
+    /**
+     * Resets the model instance.
+     * @returns {dougy.model}
+     */
+    $model.reset = function () {
+      attributes = {};
+      return this;
+    };
+    
+  }, {
+    
+    /**
      * @override
      */
-    $model.destroy = function () {
-      attributes = {};
-      return destroy.apply(this, arguments);
+    "destroy": function () {
+      this.reset();
+      return this.base.destroy.apply(this, arguments);
     }
   });
   
