@@ -64,6 +64,9 @@ var extend = function (receiver) {
   return receiver;
 };
 
+// just an empty function
+var emptyFunction = function () {};
+
 // implicit shim for Object.create
 if (!isFunction(create)) {
   create = (function () {
@@ -116,13 +119,25 @@ dougy = {
     }
     
     if (isFunction(factory)) {
-      prototype.factory = factory;
+      prototype.factory = factory || emptyFunction;
     }
     
     // reference to super object
     prototype.base = this;
     
     return prototype;
+  },
+  
+  "inherit": function (instance) {
+    var base = this.base;
+    
+    if (base && typeof base.inherit === 'function') {
+      base.inherit.apply(base, arguments);
+    }
+    
+    this.factory.apply(this, arguments);
+    
+    return instance;
   },
   
   /**
@@ -149,8 +164,12 @@ dougy = {
    */
   "create": function () {
     var instance = create(this);
-    var args = slice.call(arguments);
-    this.factory.apply(this, [instance].concat(args));
+    var args = [instance].concat(slice.call(arguments));
+    
+    if (typeof this.inherit === 'function') {
+      this.inherit.apply(this, args);
+    }
+    
     return instance;
   }
 };

@@ -124,7 +124,7 @@
         var spy = spyOn(dougy, 'factory');
         
         var i = dougy.create(1, 2, 3);
-        
+
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledWith(i, 1, 2, 3);
         expect(Object.getPrototypeOf(i)).toBe(dougy);
